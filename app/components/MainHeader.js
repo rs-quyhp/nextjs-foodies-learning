@@ -1,12 +1,13 @@
 const { default: Link } = require("next/link");
 import logo from "@/assets/logo.png";
+import Image from "next/image";
 import styles from "./main-header.module.css";
 
 const MainHeader = () => {
   return (
     <header className={styles.header}>
       <Link className={styles.logo} href={"/"}>
-        <img src={logo.src} alt="A plate with food on it" />
+        <Image src={logo} alt="A plate with food on it" priority />
         NextLevel Food
       </Link>
 
