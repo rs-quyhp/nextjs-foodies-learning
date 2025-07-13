@@ -1,28 +1,35 @@
 import Link from "next/link";
 
 import getMeals from "@/lib/meals";
+import { Suspense } from "react";
 import MealGrid from "../components/meals/meals-grid";
-import classes from "./page.module.css";
+import styles from "./page.module.css";
 
-const MealsPage = async () => {
+const Meals = async () => {
   const meals = await getMeals();
 
+  return <MealGrid meals={meals} />;
+};
+
+const MealsPage = async () => {
   return (
     <>
-      <header className={classes.header}>
+      <header className={styles.header}>
         <h1>
           Delicious meals, created{" "}
-          <span className={classes.highlight}>by you</span>
+          <span className={styles.highlight}>by you</span>
         </h1>
         <p>
           Choose your favorite recipe and cook it yourself. It is easy and fun!
         </p>
-        <p className={classes.cta}>
+        <p className={styles.cta}>
           <Link href="/meals/share">Share Your Favorite Recipe</Link>
         </p>
       </header>
-      <main className={classes.main}>
-        <MealGrid meals={meals} />
+      <main className={styles.main}>
+        <Suspense fallback={<p className={styles.loading}>Loading meals...</p>}>
+          <Meals />
+        </Suspense>
       </main>
     </>
   );
