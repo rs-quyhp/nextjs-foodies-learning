@@ -5,6 +5,11 @@ import { Suspense } from "react";
 import MealGrid from "../components/meals/meals-grid";
 import styles from "./page.module.css";
 
+export const metadata = {
+  title: "Meals",
+  description: "Delicious meals, created by you",
+};
+
 const Meals = async () => {
   const meals = await getMeals();
 

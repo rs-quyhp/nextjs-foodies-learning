@@ -4,6 +4,20 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import styles from "./page.module.css";
 
+export const generateMetadata = async ({ params }) => {
+  const { slug } = params;
+  const meal = await getMeal(slug);
+
+  if (!meal) {
+    notFound();
+  }
+
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+};
+
 const Details = async ({ slug }) => {
   const meal = await getMeal(slug);
 
